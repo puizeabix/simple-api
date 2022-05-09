@@ -33,5 +33,4 @@ jobs:
 workflows:
   simple-workflow:
     jobs:
-      - build:
-          context: sonarcloud
+      - build
