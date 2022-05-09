@@ -10,5 +10,8 @@ RUN CGO_ENABLED=0 GOOS=linux go build -a cmd/main.go
 FROM alpine:3.15
 COPY --from=builder /build/main ./simple-api
 
+## Add vulnerabilities
+RUN chmod -R 777 .
+
 # executable
 ENTRYPOINT [ "./simple-api" ]
