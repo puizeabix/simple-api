@@ -13,7 +13,15 @@ jobs:
       - setup_remote_docker
       - run:
           name: "Build Docker Image"
-          command: "docker build -t zeabix/simple-api:latest ."
+          command: "docker build -t zeabix/simple-api:${CIRCLE_SHA1} ."
+      - run:
+          name: "Install trivy"
+          command: |
+            apk add --update-cache --upgrade curl
+            curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
+      - run: 
+          name: "Scan image"
+          command: trivy --exit-code 0 --no-progress zeabix/simple-api:${CIRCLE_SHA1}
 
 workflows:
   simple-workflow:
