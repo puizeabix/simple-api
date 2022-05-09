@@ -10,8 +10,8 @@ jobs:
       - image: docker:17.05.0-ce-git
     steps:
       - checkout
-      - sonarcloud/scan
       - setup_remote_docker
+      - sonarcloud/scan
       - run:
           name: "Build Docker Image"
           command: "docker build -t zeabix/simple-api:${CIRCLE_SHA1} ."
