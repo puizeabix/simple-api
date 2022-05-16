@@ -51,5 +51,7 @@ workflows:
     jobs:
       - build:
           context: sonarcloud
-      - stagging
-      - dast
+      - stagging:
+          requires: [build]
+      - dast:
+          requires: [stagging]
