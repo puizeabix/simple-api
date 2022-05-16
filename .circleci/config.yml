@@ -28,6 +28,20 @@ jobs:
       - store_artifacts:
           path: /tmp/scan-report.json
           destination: scan-report
+  stagging:
+    docker:
+      - image: cimg/go:1.18
+    steps:
+      - run:
+          name: "Mock deploy stagging"
+          command: echo "deploy to stagging"
+  dast:
+    docker:
+      - image: cimg/go:1.8
+    steps:
+      -run:
+        name: "DAST"
+        command: "TODO"
 
 orbs:
   sonarcloud: sonarsource/sonarcloud@1.0.3
@@ -37,3 +51,5 @@ workflows:
     jobs:
       - build:
           context: sonarcloud
+      - stagging
+      - dast
