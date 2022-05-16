@@ -44,7 +44,7 @@ jobs:
           command: wget https://zeabixblob1.blob.core.windows.net/blob-container/burp-ci-driver-2021.3-162.jar
       - run:
           name: "Dynamic scan"
-          command: java -jar ./burp-ci-driver-2021.3-162.jar http://20.24.185.62:8080 --api-key=jVM3K3t5l9QmM6Jmkz9qFwBxQS1Rj28J --site-id=2 --min-severity=high --min-confidence=certain --report-file=scan-report.html --report-type=summary
+          command: java -jar burp-ci-driver-2021.3-162.jar  http://20.212.211.49:8080/ --api-key=QADUrF7dc8k3dPBWrdu72DtDpPateIDc --site-id=1 --min-severity=high --min-confidence=certain --report-file=scan-report.html --report-type=summary
 
 orbs:
   sonarcloud: sonarsource/sonarcloud@1.0.3
