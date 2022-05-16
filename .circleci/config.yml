@@ -39,9 +39,9 @@ jobs:
     docker:
       - image: cimg/go:1.8
     steps:
-      -run:
-        name: "DAST"
-        command: "TODO"
+      - run:
+          name: "DAST"
+          command: "TODO"
 
 orbs:
   sonarcloud: sonarsource/sonarcloud@1.0.3
