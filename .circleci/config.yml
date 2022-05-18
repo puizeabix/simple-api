@@ -56,7 +56,7 @@ jobs:
           command: wget https://zeabixblob1.blob.core.windows.net/blob-container/burp-ci-driver-2021.3-162.jar
       - run:
           name: "Dynamic scan"
-          command: java -jar burp-ci-driver-2021.3-162.jar  http://20.212.211.49:8080/ --api-key=QADUrF7dc8k3dPBWrdu72DtDpPateIDc --site-id=1 --min-severity=high --min-confidence=certain --report-file=scan-report.html --report-type=summary
+          command: java -jar burp-ci-driver-2021.3-162.jar  http://20.24.144.124:8080/ --api-key=QADUrF7dc8k3dPBWrdu72DtDpPateIDc --site-id=1 --min-severity=high --min-confidence=certain --report-file=scan-report.html --report-type=summary
       - store_artifacts:
           path: scan-report.html
           destination: dast-report
@@ -73,3 +73,5 @@ workflows:
           requires: [code_quality]
       - stagging:
           requires: [build]
+      - dast:
+          requires: [stagging]
