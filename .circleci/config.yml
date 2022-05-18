@@ -5,16 +5,28 @@ version: 2.1
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
+  code_quality:
+    docker:
+      - image: cimg/go:1.18
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: "Unit Test"
+          command: cd src; go test ./... -v
+      - run:
+          name: "Coverage"
+          command: go test -coverprofile=coverage.out ./... ; go tool cover -func=coverage.out > code_coverage.txt
+      - store_artifacts:
+          path: src/code_coverage.txt
+          destination: code_coverage
+      - sonarcloud/scan
   build:
     docker:
       - image: cimg/go:1.18
     steps:
       - checkout
       - setup_remote_docker
-#      - run:
-#          name: "Install curl"
-#          command: apk update && apk add curl curl-dev bash
-      - sonarcloud/scan
       - run:
           name: "Build Docker Image"
           command: "docker build -t zeabix/simple-api:${CIRCLE_SHA1} ."
@@ -55,7 +67,9 @@ orbs:
 workflows:
   simple-workflow:
     jobs:
+      - code_quality:
       - build:
           context: sonarcloud
+          requires: [code_quality]
       - stagging:
           requires: [build]
