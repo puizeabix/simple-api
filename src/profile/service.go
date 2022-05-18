@@ -67,10 +67,6 @@ func (s *profileService) DeleteProfile(ctx context.Context, id string) error {
 	return ErrNotImplemented
 }
 
-func (s *profileService) DeleteProfile(ctx context.Context, id string) error {
-	return ErrNotImplemented
-}
-
 func (s *profileService) ActivateProfile(ctx context.Context, id string) error {
 	return ErrNotImplemented
 }
