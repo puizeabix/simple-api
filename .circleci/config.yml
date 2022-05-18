@@ -16,7 +16,7 @@ jobs:
           command: cd src; go test ./... -v
       - run:
           name: "Coverage"
-          command: go test -coverprofile=coverage.out ./... ; go tool cover -func=coverage.out > code_coverage.txt
+          command: cd src; go test -coverprofile=coverage.out ./... ; go tool cover -func=coverage.out > code_coverage.txt
       - store_artifacts:
           path: src/code_coverage.txt
           destination: code_coverage
