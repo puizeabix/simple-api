@@ -68,8 +68,8 @@ workflows:
   simple-workflow:
     jobs:
       - code_quality:
-      - build:
           context: sonarcloud
+      - build:
           requires: [code_quality]
       - stagging:
           requires: [build]
