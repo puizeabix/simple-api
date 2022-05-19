@@ -21,6 +21,13 @@ jobs:
           path: src/code_coverage.txt
           destination: code_coverage
       - sonarcloud/scan
+  code_scan:
+    docker: 
+      - image: cimg/node:18.2.0
+    steps:
+      - checkout
+      - setup_remote_docker
+      - sonarcloud/scan
   build:
     docker:
       - image: cimg/go:1.18
@@ -68,6 +75,8 @@ workflows:
   simple-workflow:
     jobs:
       - code_quality:
+          context: sonarcloud
+      - code_scan:
           context: sonarcloud
       - build:
           requires: [code_quality]
