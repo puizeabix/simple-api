@@ -36,7 +36,7 @@ jobs:
             curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo sh -s -- -b /usr/local/bin
       - run: 
           name: "Scan image"
-          command: trivy image --exit-code 1 --severity "CRITICAL,HIGH" --no-progress  --output /tmp/scan-report.txt zeabix/simple-api:${CIRCLE_SHA1}
+          command: trivy image --exit-code 1 --severity "CRITICAL,HIGH" --no-progress  --format table --output /tmp/scan-report.txt zeabix/simple-api:${CIRCLE_SHA1}
       - store_artifacts:
           path: /tmp/scan-report.txt
           destination: scan-report
