@@ -23,7 +23,7 @@ jobs:
       - sonarcloud/scan
   code_scan:
     docker: 
-      - image: cimg/node:18.2.0
+      - image: cimg/node:16.15.0
     steps:
       - checkout
       - setup_remote_docker
